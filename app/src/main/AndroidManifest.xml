@@ -15,7 +15,13 @@
         android:theme="@style/Theme.ClienteGithub"
         tools:targetApi="31">
         <activity
+            android:name=".FormFragment"
+            android:exported="false"
+            android:label="FormFragment"
+            android:theme="@style/Theme.ClienteGithub" />
+        <activity
             android:name=".MainActivity"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

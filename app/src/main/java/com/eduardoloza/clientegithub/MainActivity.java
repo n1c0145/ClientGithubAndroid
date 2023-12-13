@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapters.RepositoryAdapter;
+import enviroment.githubToken;
 import models.Repositories;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fabAlbumForm;
     private RepositoriesApi repositoriesApi = RepositoriesApi.getRepositoriesApi();
 
-    private String githubToken = "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";
+    private String githubToken = enviroment.githubToken.githubToken;
 
 
     @Override
@@ -35,7 +38,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recyclerView);
+        fabAlbumForm = findViewById(R.id.fabNewAlbum);
+        fabAlbumForm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, FormFragment.class);
+                startActivity(intent);
+            }
+        });
         loadRepositories();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        this.loadRepositories();
     }
 
     private void loadRepositories() {
