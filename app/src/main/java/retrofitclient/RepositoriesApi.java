@@ -9,6 +9,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -21,8 +22,10 @@ public interface RepositoriesApi {
     Call<Repositories> createRepo(@Header("Authorization") String token, @Body Repositories Repositories);
 
     @DELETE("/repos/n1c0145/{repo}")
-    Call<Void> deleteRepo(@Header("Authorization") String token,
-                          @Path("repo") String repo);
+    Call<Void> deleteRepo(@Header("Authorization") String token, @Path("repo") String repo);
+
+    @PATCH("/repos/n1c0145/{repo}")
+    Call<Repositories> updateRepo(@Header("Authorization") String token, @Path("repo") String repo, @Body Repositories Repositories);
 
     public static RepositoriesApi getRepositoriesApi(){
         Retrofit retrofit = RetrofitClient.getClient();

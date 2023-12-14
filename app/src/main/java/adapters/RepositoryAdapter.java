@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.eduardoloza.clientegithub.FormFragment;
+import com.eduardoloza.clientegithub.MainActivity;
 import com.eduardoloza.clientegithub.R;
 
 import java.util.List;
@@ -56,12 +60,34 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
                 holder.mostrarConfirmacionEliminar(repo.getName());
             }
         });
+
+        holder.buttonEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Obtén los datos del repositorio
+                String repoName = repo.getName();
+                String repoDescription = repo.getDescription();
+
+                // Crea un Intent para abrir FormFragment
+                Intent intent = new Intent(context, FormFragment.class);
+                // Pasa los datos del repositorio al FormFragment
+                intent.putExtra("repoName", repoName);
+                intent.putExtra("repoDescription", repoDescription);
+
+                // Inicia la actividad
+                context.startActivity(intent);
+
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return repositories.size();
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -137,6 +163,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
             name.setText(repo.getName());
             description.setText(repo.getDescription());
         }
+
 
 
     }
