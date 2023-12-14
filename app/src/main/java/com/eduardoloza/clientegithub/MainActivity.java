@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapters.RepositoryAdapter;
-import enviroment.githubToken;
 import models.Repositories;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private RepositoryAdapter repositoryAdapter;
     private List<Repositories> repositories;
     private FloatingActionButton fabAlbumForm;
+
     private RepositoriesApi repositoriesApi = RepositoriesApi.getRepositoriesApi();
 
     private String githubToken = enviroment.githubToken.githubToken;

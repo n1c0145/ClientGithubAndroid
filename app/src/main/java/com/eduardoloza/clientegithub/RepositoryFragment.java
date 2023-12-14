@@ -1,10 +1,14 @@
 package com.eduardoloza.clientegithub;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +18,7 @@ import models.Repositories;
 public class RepositoryFragment extends Fragment{
     private TextView name, description;
     private Repositories repositories;
+
     public RepositoryFragment(Repositories repositories) {
         this.repositories = repositories;
     }
@@ -25,9 +30,11 @@ public class RepositoryFragment extends Fragment{
         name = view.findViewById(R.id.name);
         description = view.findViewById(R.id.description);
 
+
         name.setText(this.repositories.getName());
         description.setText(this.repositories.getDescription());
 
         return view;
     }
+
 }
