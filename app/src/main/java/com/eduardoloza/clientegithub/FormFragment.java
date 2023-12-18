@@ -33,13 +33,12 @@ public class FormFragment extends AppCompatActivity {
         txtDescription = findViewById(R.id.txtDescription);
 
         saveButton = findViewById(R.id.saveButton);
-        // Obtén los datos del Intent
+        // Obtener datos intent los datos del Intent
         Intent intent = getIntent();
         if (intent != null) {
             String repoName = intent.getStringExtra("repoName");
             String repoDescription = intent.getStringExtra("repoDescription");
 
-            // Llena las cajas de texto con los datos del repositorio
             txtName.setText(repoName);
             txtDescription.setText(repoDescription);
         }
@@ -48,31 +47,24 @@ public class FormFragment extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Obtén los datos del Intent
+                //obtengo datos intent
                 Intent intent = getIntent();
 
                 if (intent != null) {
                     String repoName = intent.getStringExtra("repoName");
-
-                    // Verifica si el campo de nombre está vacío
-                    if (txtName.getText().toString().isEmpty()) {
-                        showToast("El campo de nombre no puede estar vacío");
-                    } else {
-                        // Si el campo de nombre no está vacío, verifica si se trata de una actualización
                         if (repoName != null && !repoName.isEmpty()) {
-                            // Es una actualización
                             updateRepo(repoName);
                         } else {
-                            // No es una actualización, es una creación
                             saveRepo();
                         }
-                    }
                 }
             }
         });
     }
 
-
+/**
+ * Guardar nuevo repositorio
+ */
     private void saveRepo(){
         String name = txtName.getText().toString();
         String description = txtDescription.getText().toString();
@@ -106,6 +98,10 @@ public class FormFragment extends AppCompatActivity {
 
     }
 
+    /**
+     * Actualizar repositorio
+     * @param
+     */
     private void updateRepo(String repoName){
 
         String name = txtName.getText().toString();

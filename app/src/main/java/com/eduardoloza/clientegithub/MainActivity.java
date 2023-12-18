@@ -56,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
         this.loadRepositories();
     }
 
+    /**
+     * Metodo cargar repositorios
+     */
     private void loadRepositories() {
         repositories = new ArrayList<>();
         Call<List<Repositories>> call = repositoriesApi.getUserRepos("Bearer " + githubToken);

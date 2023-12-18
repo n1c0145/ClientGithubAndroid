@@ -65,13 +65,12 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
             @Override
             public void onClick(View v) {
 
-                // Obtén los datos del repositorio
                 String repoName = repo.getName();
                 String repoDescription = repo.getDescription();
 
-                // Crea un Intent para abrir FormFragment
+                // Intent para abrir FormFragment
                 Intent intent = new Intent(context, FormFragment.class);
-                // Pasa los datos del repositorio al FormFragment
+                // Pass data
                 intent.putExtra("repoName", repoName);
                 intent.putExtra("repoDescription", repoDescription);
 
@@ -102,16 +101,18 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
             buttonEditar = itemView.findViewById(R.id.buttonEditar);
             buttonEliminar = itemView.findViewById(R.id.buttonEliminar);
 
-
         }
 
+        /**
+         * Metodo confirmacion
+         * @param
+         */
         private void mostrarConfirmacionEliminar(String repoName) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Confirmación")
                     .setMessage("¿Estás seguro de que deseas eliminar el repositorio '" + repoName + "'?")
                     .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            // Lógica para eliminar el repositorio
                             eliminarRepositorio(repoName);
                         }
                     })
@@ -123,8 +124,11 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
                     .show();
         }
 
+        /**
+         * Metodo eliminar repositorio
+         * @param repoName
+         */
         private void eliminarRepositorio(String repoName) {
-            // Realiza la petición DELETE usando Retrofit
             Call<Void> call = repositoriesApi.deleteRepo("Bearer " + githubToken, repoName);
 
             call.enqueue(new Callback<Void>() {
@@ -149,11 +153,14 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
         }
         // Método para reiniciar la aplicación
+
+        /**
+         * Metodo actualizar app
+         */
         private void reiniciarApp() {
-            // Obtiene la instancia de la actividad actual
+
             Activity currentActivity = (Activity) context;
 
-            // Crea una nueva intención para reiniciar la actividad actual
             Intent intent = currentActivity.getIntent();
             currentActivity.finish();
             currentActivity.startActivity(intent);
